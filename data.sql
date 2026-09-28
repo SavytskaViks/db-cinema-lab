@@ -1,0 +1,119 @@
+\c cinema_db
+
+INSERT INTO cinema (name, district, address, category, status) VALUES
+('Multiplex',                 'Франківський',   'вул. Кульпарківська, 226А',     'Преміум',  'Active'),
+('Multiplex',                 'Шевченківський', 'вул. Гетьмана Мазепи, 1Б',      'Преміум',  'Active'),
+('Планета Кіно',              'Галицький',      'вул. Під Дубом, 7Б',            'Стандарт', 'Active'),
+('Планета Кіно',              'Сихівський',     'вул. Стрийська, 30',            'Стандарт', 'Active'),
+('Кінопалац ім. О. Довженка', 'Сихівський',     'просп. Червоної Калини, 81',    'Економ',   'Under Repair'),
+('Lviv Film Center',          'Франківський',   'вул. Володимира Великого, 14А', 'Преміум',  'Active'),
+('Коперник',                  'Галицький',      'вул. Коперника, 9',             'Стандарт', 'Active'),
+('Київ',                      'Галицький',      'просп. Шевченка, 8',            'Економ',   'Closed');
+
+INSERT INTO hall (name, capacity, cinema_id) VALUES
+('Зал 1',       150, 1),  
+('VIP-зал',      80, 1), 
+('Зал 1',       200, 2),  
+('Зал 1',       120, 3), 
+('Зал 2',        60, 3), 
+('Зал 1',       180, 4),  
+('Зал 1',       100, 5),  
+('Зал 1',        90, 6),  
+('Зал 2',        50, 6),  
+('Зал 1',        70, 7),  
+('Зал 1',       110, 8);  
+
+INSERT INTO film (title, director, cinematographer, duration, has_awards, rental_status, promo_image) VALUES
+('Людина-павук: Абсолютно новий день', 'Дестін Деніел Креттон', 'Бретт Павлак', 145, TRUE,  TRUE, 'https://images.unsplash.com/photo-1635863138275-d9b33299680b'),
+('Над безоднею 2',                     'Майкл Спіріґ',          'Ендрю Стрехорн', 100, FALSE, TRUE, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUgMaw1cp0iIIGRttHOUDve2lswTLTSzwrw22NFC-5Qw&s=10'),
+('Потяг Червона Рута',                 'Олексій Єсаков',        'Юрій Король',   90, TRUE,  TRUE, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQOXgka1WspfHDgSeQ5ua1k0k-6KHyD3F595jJnXthEw&s=10'),
+('Форсаж',                             'Роб Коен',              'Еріксон Кор',   106, TRUE,  TRUE, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzGP_q9T1cL_vI-oY-MVvenYjarNgs6weYFP-eoxSZcw&s=10'),
+('Практична магія 2',                  'Сюзанна Бір',           'Саймон Дагган', 120, FALSE, TRUE, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Phy8xKk5Ba2Yi-yaHQbU43fRI9zZ75pFZfhFD3M_lg&s=10'),
+('Одіссея',                            'Крістофер Нолан',       'Хойте ван Хойтем', 192, TRUE, TRUE, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTiinfSx3QES1NbEF9AXsZTVE1uU9pCt-3Zr_iMatjOg&s=10');
+
+INSERT INTO genre (name) VALUES
+('Фантастика'),
+('Пригоди'),
+('Драма'),
+('Комедія'),
+('Екшн'),
+('Трилер'),
+('Анімація'),
+('Романтика'),
+('Історичний');
+
+INSERT INTO country (name) VALUES
+('США'),
+('Україна'),
+('Велика Британія'),
+('Франція'),
+('Німеччина'),
+('Японія');
+
+INSERT INTO actor (full_name) VALUES
+('Том Голланд'),
+('Том Бріттні'),
+('Вірджинія Ґарднер'),
+('Юрій Горбунов'),
+('Станіслав Боклан'),
+('Він Дізель'),
+('Ніколь Кідман'),
+('Сандра Буллок'),
+('Метт Деймон');
+
+INSERT INTO film_genre (film_id, genre_id) VALUES
+(1, 1), (1, 2), (1, 5),
+(2, 2), (2, 6),
+(3, 4), (3, 8),
+(4, 5), (4, 6),
+(5, 1), (5, 4), (5, 8),
+(6, 1), (6, 3);
+
+INSERT INTO film_country (film_id, country_id) VALUES
+(1, 1),
+(2, 1), (2, 3),
+(3, 2),
+(4, 1),
+(5, 1),
+(6, 1);
+
+INSERT INTO film_actor (film_id, actor_id) VALUES
+(1, 1),
+(2, 2), (2, 3),
+(3, 4), (3, 5),
+(4, 6),
+(5, 7), (5, 8),
+(6, 1), (6, 9);
+
+INSERT INTO session (film_id, hall_id, start_time, base_price) VALUES
+(1, 1,  '2026-09-25 14:00', 180.00),
+(1, 3,  '2026-09-25 17:00', 190.00),
+(3, 4,  '2026-09-25 16:00', 140.00),
+(3, 6,  '2026-09-25 19:00', 145.00),
+(3, 10, '2026-09-25 20:30', 135.00),
+(4, 8,  '2026-09-25 21:00', 175.00),
+(6, 1,  '2026-09-26 15:00', 220.00),
+(6, 3,  '2026-09-26 18:00', 210.00),
+(5, 4,  '2026-09-26 13:00', 130.00),
+(2, 9,  '2026-09-26 20:00', 120.00),
+(1, 2,  '2026-09-26 21:30', 220.00),
+(3, 5,  '2026-09-27 15:00', 140.00),
+(6, 10, '2026-09-27 17:00', 200.00),
+(2, 4,  '2026-09-27 19:00', 130.00),
+(5, 8,  '2026-09-27 21:00', 150.00);
+
+INSERT INTO ticket (session_id, seat_number, status) VALUES
+(1, 1,  'Sold'),
+(1, 2,  'Sold'),
+(1, 3,  'Booked'),
+(1, 4,  'Available'),
+(2, 1,  'Sold'),
+(3, 5,  'Sold'),
+(3, 6,  'Available'),
+(4, 10, 'Booked'),
+(6, 2,  'Sold'),
+(7, 1,  'Available');
+
+
+
+
