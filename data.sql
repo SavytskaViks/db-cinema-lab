@@ -127,14 +127,7 @@ INSERT INTO ticket (session_id, seat_number, status) VALUES
 (1, 1,  'Sold'),
 (1, 2,  'Sold'),
 (1, 3,  'Booked'),
-(1, 4,  'Available'),
 (2, 1,  'Sold'),
 (3, 5,  'Sold'),
-(3, 6,  'Available'),
 (4, 10, 'Booked'),
-(6, 2,  'Sold'),
-(7, 1,  'Available');
-
-
-
-
+(6, 2,  'Sold');

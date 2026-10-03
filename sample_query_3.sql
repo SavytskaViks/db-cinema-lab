@@ -1,5 +1,5 @@
 SELECT
-    h.capacity - COUNT(t.ticket_id) FILTER (WHERE t.status IN ('Sold', 'Booked')) AS free_seats
+    h.capacity - COUNT(t.ticket_id) AS free_seats
 FROM session s
 JOIN repertoire r ON r.repertoire_id = s.repertoire_id
 JOIN hall   h ON h.hall_id   = s.hall_id

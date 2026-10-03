@@ -88,8 +88,8 @@ CREATE TABLE session (
 CREATE TABLE ticket (
     ticket_id       SERIAL PRIMARY KEY,
     seat_number     INTEGER NOT NULL CHECK (seat_number > 0),
-    status          VARCHAR(20) NOT NULL DEFAULT 'Available'
-                        CHECK (status IN ('Sold', 'Booked', 'Available')),
+    status          VARCHAR(20) NOT NULL
+                        CHECK (status IN ('Booked', 'Sold')),
     session_id      INTEGER NOT NULL
                         REFERENCES session (session_id)
                         ON DELETE CASCADE,
@@ -165,3 +165,26 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trg_session_consistency
     BEFORE INSERT OR UPDATE ON session
     FOR EACH ROW EXECUTE FUNCTION check_session_consistency();
+
+-- Тригер перевіряє квиток перед додаванням або зміною:
+-- номер місця не може бути більшим за місткість залу сеансу.
+CREATE FUNCTION check_ticket_seat() RETURNS trigger AS $$
+DECLARE
+    hall_capacity INTEGER;
+BEGIN
+    SELECT h.capacity INTO hall_capacity
+    FROM session s
+    JOIN hall h ON h.hall_id = s.hall_id
+    WHERE s.session_id = NEW.session_id;
+
+    IF NEW.seat_number > hall_capacity THEN
+        RAISE EXCEPTION 'Seat % exceeds hall capacity %', NEW.seat_number, hall_capacity;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_ticket_seat
+    BEFORE INSERT OR UPDATE ON ticket
+    FOR EACH ROW EXECUTE FUNCTION check_ticket_seat();
