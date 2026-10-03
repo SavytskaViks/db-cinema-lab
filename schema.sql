@@ -123,6 +123,7 @@ CREATE TABLE film_actor (
     actor_id        INTEGER NOT NULL
                         REFERENCES actor (actor_id)
                         ON DELETE CASCADE,
+    is_lead         BOOLEAN NOT NULL DEFAULT FALSE,
     PRIMARY KEY (film_id, actor_id)
 );
 

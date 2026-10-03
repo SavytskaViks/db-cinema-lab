@@ -82,13 +82,13 @@ INSERT INTO film_country (film_id, country_id) VALUES
 (5, 1),
 (6, 1);
 
-INSERT INTO film_actor (film_id, actor_id) VALUES
-(1, 1),
-(2, 2), (2, 3),
-(3, 4), (3, 5),
-(4, 6),
-(5, 7), (5, 8),
-(6, 1), (6, 9);
+INSERT INTO film_actor (film_id, actor_id, is_lead) VALUES
+(1, 1, TRUE),
+(2, 2, TRUE), (2, 3, FALSE),
+(3, 4, TRUE), (3, 5, TRUE),
+(4, 6, TRUE),
+(5, 7, TRUE), (5, 8, TRUE),
+(6, 1, FALSE), (6, 9, TRUE);
 
 INSERT INTO repertoire (cinema_id, film_id, rental_cost, show_start, show_end, status) VALUES
 (1, 1, 12000.00, '2026-09-01', '2026-10-31', 'Active'),  
