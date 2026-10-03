@@ -1,9 +1,10 @@
 SELECT
     h.capacity - COUNT(t.ticket_id) FILTER (WHERE t.status IN ('Sold', 'Booked')) AS free_seats
 FROM session s
-JOIN hall   h ON s.hall_id = h.hall_id
-JOIN cinema c ON h.cinema_id = c.cinema_id
-JOIN film   f ON s.film_id  = f.film_id
+JOIN repertoire r ON r.repertoire_id = s.repertoire_id
+JOIN hall   h ON h.hall_id   = s.hall_id
+JOIN cinema c ON c.cinema_id = r.cinema_id
+JOIN film   f ON f.film_id   = r.film_id
 LEFT JOIN ticket t ON t.session_id = s.session_id
 WHERE c.name ILIKE 'Multiplex'
   AND c.district ILIKE 'Франківський'
